@@ -1,2 +1,1 @@
-# lazy-vis
-Data visualizations using React with Recharts
+React starter with React, Redux, Babel and Webpack
