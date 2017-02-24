@@ -3,7 +3,28 @@ import { BarChart, Bar, Tooltip, XAxis, YAxis, Legend, CartesianGrid } from 'rec
 
 
 // This is a functional component rather than a class component
-const BarChartComponent = () => {
+const BarChartComponent = ({orders}) => {
+
+  // const orders = props.orders;
+  console.log("Orders from Bar Charts: ", orders);
+  console.log("Orders Length: ", orders.length);
+
+  var times = [];
+
+  if (orders) {
+    for (var i = 0; i < orders.length; i++) {
+      if (orders[i].orderCreatedAt !== null) {
+        let  time = new Date(parseInt(orders[i].orderCreatedAt));
+        console.log(orders[i].orderCreatedAt, time);
+        times.push(time);
+      }
+    }
+    console.log('times', times, times.length);
+    for (var i = 0; i < times.length; i++) {
+      console.log(times[i]);
+      console.log(times[i].getUTCDate());
+    }
+  }
 
   const data =
     [
@@ -41,7 +62,6 @@ const BarChartComponent = () => {
   return (
     <div style={barChartStyle}>
       <h4>Bar Chart</h4>
-
       <BarChart width={600} height={300} data={data}>
         <XAxis dataKey="day" stroke="#8884d8" />
         <YAxis />
