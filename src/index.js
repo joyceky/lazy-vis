@@ -30,7 +30,6 @@ class App extends Component {
     const URL = 'https://lazybuffs.herokuapp.com/dispatch/charts-data';
     const request = axios.get(URL)
     request.then((response) => {
-      console.log(response.data);
       // must give this data to the components
       // should this api call be happening in an action?
       this.setState({ orders: response.data });

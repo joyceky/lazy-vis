@@ -9,22 +9,35 @@ const BarChartComponent = ({orders}) => {
   console.log("Orders from Bar Charts: ", orders);
   console.log("Orders Length: ", orders.length);
 
-  var times = [];
+  var currentDateRange = [];
+  var date1 = new Date('2017-01-01');
+  var date2 = new Date('2017-02-01');
 
-  if (orders) {
-    for (var i = 0; i < orders.length; i++) {
-      if (orders[i].orderCreatedAt !== null) {
-        let  time = new Date(parseInt(orders[i].orderCreatedAt));
-        console.log(orders[i].orderCreatedAt, time);
-        times.push(time);
+  getDateRange(date1, date2);
+
+  function getDateRange(dateStart, dateEnd) {
+    if (orders) {
+      for (var i = 0; i < orders.length; i++) {
+        if (orders[i].orderCreatedAt !== null && orders[i].orderCreatedAt !== undefined) {
+          console.log("time", time);
+                console.log("date1", Date.parse(dateStart));
+                console.log("date2", Date.parse(dateEnd));
+          let  time = orders[i].orderCreatedAt;
+          if (time >= Date.parse(dateStart) && time <= Date.parse(dateEnd)) {
+
+            currentDateRange.push(orders[i]);
+          }
+          else {
+            continue;
+          }
+        }
       }
-    }
-    console.log('times', times, times.length);
-    for (var i = 0; i < times.length; i++) {
-      console.log(times[i]);
-      console.log(times[i].getUTCDate());
+      console.log(currentDateRange, currentDateRange.length, "here");
     }
   }
+
+
+
 
   const data =
     [
