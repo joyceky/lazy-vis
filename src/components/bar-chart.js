@@ -6,8 +6,8 @@ import { BarChart, Bar, Tooltip, XAxis, YAxis, Legend, CartesianGrid } from 'rec
 const BarChartComponent = ({orders}) => {
 
   // const orders = props.orders;
-  console.log("Orders from Bar Charts: ", orders);
-  console.log("Orders Length: ", orders.length);
+  // console.log("Orders from Bar Charts: ", orders);
+  // console.log("Orders Length: ", orders.length);
 
   var currentDateRange = [];
   var date1 = new Date('2017-01-01');
@@ -19,9 +19,9 @@ const BarChartComponent = ({orders}) => {
     if (orders) {
       for (var i = 0; i < orders.length; i++) {
         if (orders[i].orderCreatedAt !== null && orders[i].orderCreatedAt !== undefined) {
-          console.log("time", time);
-                console.log("date1", Date.parse(dateStart));
-                console.log("date2", Date.parse(dateEnd));
+          // console.log("time", time);
+          // console.log("date1", Date.parse(dateStart));
+          // console.log("date2", Date.parse(dateEnd));
           let  time = orders[i].orderCreatedAt;
           if (time >= Date.parse(dateStart) && time <= Date.parse(dateEnd)) {
 
@@ -32,9 +32,22 @@ const BarChartComponent = ({orders}) => {
           }
         }
       }
+      currentDateRange.sort();
       console.log(currentDateRange, currentDateRange.length, "here");
     }
+    for (var i = 0; i < currentDateRange.length; i++) {
+      var date = new Date(parseInt(currentDateRange[i].orderCreatedAt));
+      console.log((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
+      // console.log(ToLocalDate(currentDateRange[i].orderCreatedAt));
+    }
   }
+
+ function ToLocalDate (inDate) {
+   console.log(inDate);
+    var date = new Date();
+    date.setTime(inDate.valueOf() - 60000 * inDate.getTimezoneOffset());
+    return date;
+}
 
 
 
