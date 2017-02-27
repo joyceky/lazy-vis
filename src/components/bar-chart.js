@@ -10,44 +10,58 @@ const BarChartComponent = ({orders}) => {
   // console.log("Orders Length: ", orders.length);
 
   var currentDateRange = [];
+  // var janOrders = [];
   var date1 = new Date('2017-01-01');
   var date2 = new Date('2017-02-01');
 
   getDateRange(date1, date2);
 
+
+
+
   function getDateRange(dateStart, dateEnd) {
     if (orders) {
-      for (var i = 0; i < orders.length; i++) {
-        if (orders[i].orderCreatedAt !== null && orders[i].orderCreatedAt !== undefined) {
-          // console.log("time", time);
-          // console.log("date1", Date.parse(dateStart));
-          // console.log("date2", Date.parse(dateEnd));
-          let  time = orders[i].orderCreatedAt;
-          if (time >= Date.parse(dateStart) && time <= Date.parse(dateEnd)) {
+      var janOrders = orders.filter((order) => {
+        var date = new Date(parseInt(order.orderCreatedAt));
 
-            currentDateRange.push(orders[i]);
-          }
-          else {
-            continue;
-          }
+        if (date >= Date.parse(dateStart) && date <= Date.parse(dateEnd)) {
+          return true;
         }
-      }
-      currentDateRange.sort();
-      console.log(currentDateRange, currentDateRange.length, "here");
+      });
     }
-    for (var i = 0; i < currentDateRange.length; i++) {
-      var date = new Date(parseInt(currentDateRange[i].orderCreatedAt));
-      console.log((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
-      // console.log(ToLocalDate(currentDateRange[i].orderCreatedAt));
-    }
-  }
+    console.log("Filtered Orders, Jan: ", janOrders.length, janOrders);
 
- function ToLocalDate (inDate) {
-   console.log(inDate);
-    var date = new Date();
-    date.setTime(inDate.valueOf() - 60000 * inDate.getTimezoneOffset());
-    return date;
-}
+  }
+    //
+    //   for (var i = 0; i < currentDateRange.length; i++) {
+    //     var date = new Date(parseInt(currentDateRange[i].orderCreatedAt));
+    //     console.log((date.getMonth() + 1) + '/' + date.getDate() + '/' +  date.getFullYear());
+      //   for (var i = 1; i < 31; i++) {
+      //   if (date.getDate === i) {
+      //     janOrders[i] = date;
+      //   }
+      //   // console.log(ToLocalDate(currentDateRange[i].orderCreatedAt));
+      // }
+    // }
+
+// console.log("January Orders by Day: ", janOrders);
+
+// Filter example, use to filter arrays without loops
+// const daysOnTheFirst = currentDateRange.filter((order) => {
+//   var date = new Date(parseInt(order.orderCreatedAt));
+//
+//   if (date.getDate() = 1) return true;
+// });
+//
+//
+//
+//
+//  function ToLocalDate (inDate) {
+//    console.log(inDate);
+//     var date = new Date();
+//     date.setTime(inDate.valueOf() - 60000 * inDate.getTimezoneOffset());
+//     return date;
+// }
 
 
 

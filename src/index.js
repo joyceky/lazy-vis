@@ -37,10 +37,19 @@ class App extends Component {
 
   }
 
+  // <select>
+  //   <option value='0'>January</option>
+  // </select>
+  //
+  // <buttton>Gen Report</button>
+
+
+
   render() {
 
     return (
       <div>
+
         <BarChartComponent orders={this.state.orders} />
         <LineChartComponent />
         <PieChartComponent />
