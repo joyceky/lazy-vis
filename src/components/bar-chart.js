@@ -18,14 +18,14 @@ const BarChartComponent = ({orders}) => {
   NOTE: Refactor to get current month and year
 */
   function makeGraphSeedData(month, year, day) {
-    var graphSeedData = {};
+    var graphSeedData = [];
 
     var daysInMonth = new Date(year, month, day || 0).getDate();
 
     for (var i = 1; i <= daysInMonth; i++) {
       graphSeedData[i] =
       {
-        orders: [],
+        orders: ["grog"],
         tipTotal: 0,
       };
     }
@@ -49,7 +49,8 @@ const BarChartComponent = ({orders}) => {
 
   function monthlyOrders(graphSeedData, sortedData) {
     for (var i = 1; i <= Object.keys(graphSeedData).length; i++) {
-      graphSeedData[i][orders] = sortedData.filter((order) => {
+      
+      graphSeedData[i].orders = sortedData.filter((order) => {
         var date = new Date(parseInt(order.orderCreatedAt));
 
         if (date.getDate() == i) return true;
