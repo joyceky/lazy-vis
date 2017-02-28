@@ -12,16 +12,14 @@ const BarChartComponent = ({orders}) => {
   // });
 
   var currentDateRange = [];
-  var ordersPerDay = {};
+  var ordersPerDay = getGraphSeedData(2, 2017);
 
-  var date1 = new Date('2017-01-02');
-  var date2 = new Date('2017-01-03');
-
-  getDateRange(date1, date2);
-
-  console.log("get graph data", getGraphSeedData(2, 2016));
+  // var date1 = new Date('2017-01-2');
+  // var date2 = new Date('2017-01-12');
+  //
+  // getDateRange(date1, date2);
   console.log("sorting log", sortData(orders, 'orderCreatedAt'));
-
+  console.log(monthlyOrders(ordersPerDay, orders));
 /*
 - creates an object to hold graph data (graphSeedData)
 - gets the number of days in the supplied month
@@ -65,19 +63,56 @@ const BarChartComponent = ({orders}) => {
     sortedData.reverse();
 
     for (var i = 0; i < sortedData.length; i++) {
-      console.log(sortedData[i]);
+      // console.log(sortedData[i]);
       if (sortedData[i].orderCreatedAt) {
-        console.log(new Date(parseInt(sortedData[i].orderCreatedAt)));
+        // console.log(new Date(parseInt(sortedData[i].orderCreatedAt)));
       }
     }
 
     return sortedData;
   }
 
+  function monthlyOrders(graphSeedData, sortedData) {
+    // push data in to arrays at key value
+    console.log("monthlyOrders");
+    console.log("MO", graphSeedData, Object.keys(graphSeedData).length);
+    console.log("MO", sortedData);
+
+    for (var i = 1; i < Object.keys(graphSeedData).length; i++) {
+      graphSeedData[i] = sortedData.filter((order) => {
+        var date = new Date(parseInt(order.orderCreatedAt));
+
+        if (date.getDate() == i) return true;
+      });
+      console.log(graphSeedData);
+    }
 
 
+    /*
+    we need to get the tips for the day and add that value to the graphSeedData
+----------------
+    we need to loop through the sorted data array
+    we only want to operate on the section in the search range
+      we skip any values at the start of the loop that are not the search start date or greater
+      and we need to terminate at the value the is greater than the search end date
 
+      we need to count all the tips for the orders that occurred on that day
+        create a temptip variable that will hold the tips for the day
+        initialize to 0 before entering the loop and when the date changes
 
+        create a var tempdate, and set to first date, and set the temptip = to thisOrder.tip
+        if the tempdate == thisOrder.date : then add tip to temp var
+        if the tempdate != thisOrder.date : add the temptip as the value to the previous day in the graphSeedData
+                                    (as the tip values is for the prev day),
+                                    clear the temptip, set the temptip equal to
+                                    the tip for the current day (which is the new day)
+
+        once the loop is done the graphSeedData should contain the data in a format
+        for the graph
+
+        use the graphSeedData and pass it into another function that will call the graph
+    */
+  }
 
 
   function getDateRange(dateStart, dateEnd) {
@@ -96,11 +131,8 @@ const BarChartComponent = ({orders}) => {
           return true;
         }
       });
-
-
-console.log("Filtered Orders, Date Range (Jan): ", currentDateRange.length, currentDateRange);
-
-}
+      console.log("Filtered Orders, Date Range (Jan): ", currentDateRange.length, currentDateRange);
+  }
 }
 
     //   var counter = 0;
