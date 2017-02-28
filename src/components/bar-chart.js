@@ -1,6 +1,8 @@
 import React from 'react';
 import { BarChart, Bar, Tooltip, XAxis, YAxis, Legend, CartesianGrid } from 'recharts';
 
+// All data will need to be sorted by driver
+
 // This is a functional component rather than a class component
 const BarChartComponent = ({orders}) => {
 
@@ -49,7 +51,7 @@ const BarChartComponent = ({orders}) => {
 
   function monthlyOrders(graphSeedData, sortedData) {
     for (var i = 1; i <= Object.keys(graphSeedData).length; i++) {
-      
+
       graphSeedData[i].orders = sortedData.filter((order) => {
         var date = new Date(parseInt(order.orderCreatedAt));
 
