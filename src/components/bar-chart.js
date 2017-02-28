@@ -84,7 +84,8 @@ const BarChartComponent = ({orders}) => {
 
         if (date.getDate() == i) return true;
       });
-      console.log(graphSeedData);
+
+      console.log(graphSeedData[i]);
     }
 
 
