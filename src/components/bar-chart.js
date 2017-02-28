@@ -5,25 +5,29 @@ import { BarChart, Bar, Tooltip, XAxis, YAxis, Legend, CartesianGrid } from 'rec
 const BarChartComponent = ({orders}) => {
 
   var currentDateRange = [];
-  var ordersPerDay = getGraphSeedData(2, 2017);
-  console.log("Result of ordersPerDay(): ", ordersPerDay);
+  var ordersPerDay = makeGraphSeedData(2, 2017);
+  console.log("Result of makeGraphSeedData(): ", ordersPerDay);
   var sortedOrders = sortData(orders, 'orderCreatedAt');
   console.log("Result of sortedOrders(): ", sortedOrders);
   ordersPerDay = monthlyOrders(ordersPerDay, sortedOrders);
   console.log("Result of monthlyOrders(): ", ordersPerDay);
 
-
-  function getGraphSeedData(month, year, day) {
+/*
+  Creates an oject with a numerical key for every day of the chosen month
+  Day is optional
+  NOTE: Refactor to get current month and year
+*/
+  function makeGraphSeedData(month, year, day) {
     var graphSeedData = {};
 
     var daysInMonth = new Date(year, month, day || 0).getDate();
 
     for (var i = 1; i <= daysInMonth; i++) {
-      var obj = {
-        name: i.toString(),
-        value: null
+      graphSeedData[i] =
+      {
+        orders: [],
+        tipTotal: 0,
       };
-      graphSeedData[i] = obj;
     }
 
     return graphSeedData;
@@ -45,7 +49,7 @@ const BarChartComponent = ({orders}) => {
 
   function monthlyOrders(graphSeedData, sortedData) {
     for (var i = 1; i <= Object.keys(graphSeedData).length; i++) {
-      graphSeedData[i] = sortedData.filter((order) => {
+      graphSeedData[i][orders] = sortedData.filter((order) => {
         var date = new Date(parseInt(order.orderCreatedAt));
 
         if (date.getDate() == i) return true;
