@@ -72,10 +72,10 @@ class App extends Component {
     return (
       <div>
 
-        <BarChartComponent orders={this.formatData(this.state.orders)} />
-        <LineChartComponent />
-        <PieChartComponent />
-        <ComposedChartComponent />
+        <BarChartComponent orders={this.formatData(this.state.orders)} dataKey="orders" />
+
+        <BarChartComponent orders={this.formatData(this.state.orders)} dataKey="tips" />
+
       </div>
     );
   }
