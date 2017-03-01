@@ -60,7 +60,7 @@ const BarChartComponent = ({orders}) => {
         if (date.getDate() == i) return true;
       });
       graphSeedData[i].numOrders = graphSeedData[i].orders.length;
-      graphSeedData[i].tipTotal = sum(graphSeedData[i].orders, "tipTotal")
+      graphSeedData[i].tipTotal = sum(graphSeedData[i].orders, "orderTip");
     }
     return graphSeedData;
   }
@@ -70,20 +70,33 @@ const BarChartComponent = ({orders}) => {
           return 0;
       }
       return items.reduce(function (a, b) {
-          return b[prop] == null ? a : a + b[prop];
+          return b[prop] == null ? parseFloat(a) : parseFloat(a) + parseFloat(b[prop]);
       }, 0);
   };
 
   return (
-    <div style={barChartStyle}>
-      <h4>Bar Chart</h4>
-      <BarChart width={1100} height={500} data={ordersPerDay}>
-        <XAxis dataKey="date" stroke="#8884d8" />
-        <YAxis />
-        <Tooltip />
-        <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <Bar type="monotone" dataKey="numOrders" fill="#8884d8" barSize={30} />
-      </BarChart>
+    <div>
+      <div style={barChartStyle}>
+        <h4>Orders Chart</h4>
+        <BarChart width={1100} height={500} data={ordersPerDay}>
+          <XAxis dataKey="date" stroke="#8884d8" />
+          <YAxis />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <Bar type="monotone" dataKey="numOrders" fill="#8884d8" barSize={30} />
+        </BarChart>
+      </div>
+
+      <div style={barChartStyle}>
+        <h4>Tips Chart</h4>
+        <BarChart width={1100} height={500} data={ordersPerDay}>
+          <XAxis dataKey="date" stroke="#8884d8" />
+          <YAxis />
+          <Tooltip />
+          <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
+          <Bar type="monotone" dataKey="tipTotal" fill="#0fb150" barSize={30} />
+        </BarChart>
+      </div>
     </div>
   );
 };
