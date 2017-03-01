@@ -30,20 +30,12 @@ class App extends Component {
     const URL = 'https://lazybuffs.herokuapp.com/dispatch/charts-data';
     const request = axios.get(URL)
     request.then((response) => {
-      // must give this data to the components
-      // should this api call be happening in an action?
+
       this.setState({ orders: response.data });
     });
 
   }
 
-  // <select>
-  //   <option value='0'>January</option>
-  // </select>
-  //
-  // <buttton>Gen Report</button>
-
-// format data here and pass to appropriate chart component
   formatData(orders) {
 
     const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
