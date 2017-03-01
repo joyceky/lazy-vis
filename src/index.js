@@ -43,14 +43,36 @@ class App extends Component {
   //
   // <buttton>Gen Report</button>
 
+// format data here and pass to appropriate chart component
+  formatData(orders) {
 
+    const days = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31];
+
+    const cleanData = days.map((day) => {
+      const daysOrders = orders.filter((order) => {
+        if ( new Date(parseInt(order.orderCreatedAt)).getDate() === day) return true;
+      });
+
+      const total = daysOrders.reduce((curr, nextOrder) => {
+        return curr + parseFloat(nextOrder.orderSubTotal);
+      }, 0);
+
+      const tips = daysOrders.reduce((curr, nextOrder) => {
+        return curr + parseFloat(nextOrder.orderTip);
+      }, 0);
+
+      return { date: day, total, tips, orders: daysOrders.length };
+    });
+
+    return cleanData;
+  }
 
   render() {
 
     return (
       <div>
 
-        <BarChartComponent orders={this.state.orders} />
+        <BarChartComponent orders={this.formatData(this.state.orders)} />
         <LineChartComponent />
         <PieChartComponent />
         <ComposedChartComponent />

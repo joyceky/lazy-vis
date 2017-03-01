@@ -68,21 +68,21 @@ in filter, access global object for dates
 //   }
 // }
 
-  //   var counter = 0;
-  //
-  //   for (var i = 1; i <= 31; i++) {
-  //
-  //   ordersPerDay[i] = orders.filter(function(order){
-  //     console.log(order.orderCreatedAt);
-  //     let orderedAt = new Date(parseInt(order.orderCreatedAt));
-  //     console.log(i, orderedAt);
-  //     counter++;
-  //      return orderedAt.getMonth() === 1 && orderedAt.getDay() === i;
-  //
-  //     });
-  // }
-  // console.log( counter);
-  // console.log("Orders Per Day Filtered: ", ordersPerDay, i);
+//   var counter = 0;
+//
+//   for (var i = 1; i <= 31; i++) {
+//
+//   ordersPerDay[i] = orders.filter(function(order){
+//     console.log(order.orderCreatedAt);
+//     let orderedAt = new Date(parseInt(order.orderCreatedAt));
+//     console.log(i, orderedAt);
+//     counter++;
+//      return orderedAt.getMonth() === 1 && orderedAt.getDay() === i;
+//
+//     });
+// }
+// console.log( counter);
+// console.log("Orders Per Day Filtered: ", ordersPerDay, i);
 
 
 //  function ToLocalDate (inDate) {
@@ -97,3 +97,83 @@ in filter, access global object for dates
 //  let date = new Date(parseInt(graphSeedData[i][x].orderCreatedAt));
   // console.log("i", i, date);
 // }
+
+// const styledDataForBarchart =x orders.map((order) => {
+//  const styledObj = {
+//    orders: ["grog"],
+//    numOrders: 0,
+//    date: i,
+//    tipTotal: 0,
+//  };
+// });
+
+
+// var currentDateRange = [];
+//
+// var ordersPerDay = makeGraphSeedData(2, 2017);
+// // console.log("Result of makeGraphSeedData(): ", ordersPerDay);
+// var sortedOrders = sortData(orders, 'orderCreatedAt');
+// // console.log("Result of sortedOrders(): ", sortedOrders);
+// ordersPerDay = monthlyOrders(ordersPerDay, sortedOrders);
+// console.log("Result of monthlyOrders(): ", ordersPerDay);
+
+/*
+Creates an oject with a numerical key for every day of the chosen month
+Day is optional
+NOTE: Refactor to get current month and year
+*/
+// function makeGraphSeedData(month, year, day) {
+//   var graphSeedData = [];
+//
+//   var daysInMonth = new Date(year, month, day || 0).getDate();
+//
+//   for (var i = 1; i <= daysInMonth; i++) {
+//     graphSeedData[i] =
+//     {
+//       orders: ["grog"],
+//       numOrders: 0,
+//       date: i,
+//       tipTotal: 0,
+//     };
+//   }
+//
+//   return graphSeedData;
+// }
+//
+//
+// function sortData(dataToSort, keyToSortOn) {
+//   var sortedData = null;
+//
+//   sortedData = dataToSort.sort(function(a,b){
+//     // console.log("a", a);
+//     // console.log("b", b);
+//     return new Date(b.keyToSortOn) - new Date(a.keyToSortOn);
+//   });
+//
+//   sortedData.reverse();
+//
+//   return sortedData;
+// }
+//
+// function monthlyOrders(graphSeedData, sortedData) {
+//   for (var i = 1; i <= Object.keys(graphSeedData).length; i++) {
+//
+//     graphSeedData[i].orders = sortedData.filter((order) => {
+//       var date = new Date(parseInt(order.orderCreatedAt));
+//
+//       if (date.getDate() == i) return true;
+//     });
+//     graphSeedData[i].numOrders = graphSeedData[i].orders.length;
+//     graphSeedData[i].tipTotal = sum(graphSeedData[i].orders, "orderTip");
+//   }
+//   return graphSeedData;
+// }
+//
+// function sum (items, prop) {
+//     if (items == null) {
+//         return 0;
+//     }
+//     return items.reduce(function (a, b) {
+//         return b[prop] == null ? parseFloat(a) : parseFloat(a) + parseFloat(b[prop]);
+//     }, 0);
+// };
