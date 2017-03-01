@@ -60,43 +60,19 @@ const BarChartComponent = ({orders}) => {
         if (date.getDate() == i) return true;
       });
       graphSeedData[i].numOrders = graphSeedData[i].orders.length;
+      graphSeedData[i].tipTotal = sum(graphSeedData[i].orders, "tipTotal")
     }
     return graphSeedData;
   }
 
-
-  const data =
-    [
-      {
-        day: 1,
-        orders: 12
-      },
-      {
-        day: 2,
-        orders: 8
-      },
-      {
-        day: 3,
-        orders: 32
-      },
-      {
-        day: 4,
-        orders: 9
-      },
-      {
-        day: 5,
-        orders: 17
-      },
-      {
-        day: 6,
-        orders: 12
-      },
-      {
-        day: 7,
-        orders: 4
+  function sum (items, prop) {
+      if (items == null) {
+          return 0;
       }
-    ];
-
+      return items.reduce(function (a, b) {
+          return b[prop] == null ? a : a + b[prop];
+      }, 0);
+  };
 
   return (
     <div style={barChartStyle}>
@@ -114,7 +90,6 @@ const BarChartComponent = ({orders}) => {
 
 const barChartStyle = {
   width: '80%',
-  // float: 'left',
   textAlign: 'center'
 };
 
