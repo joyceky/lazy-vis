@@ -8,9 +8,9 @@ const BarChartComponent = ({orders}) => {
 
   var currentDateRange = [];
   var ordersPerDay = makeGraphSeedData(2, 2017);
-  console.log("Result of makeGraphSeedData(): ", ordersPerDay);
+  // console.log("Result of makeGraphSeedData(): ", ordersPerDay);
   var sortedOrders = sortData(orders, 'orderCreatedAt');
-  console.log("Result of sortedOrders(): ", sortedOrders);
+  // console.log("Result of sortedOrders(): ", sortedOrders);
   ordersPerDay = monthlyOrders(ordersPerDay, sortedOrders);
   console.log("Result of monthlyOrders(): ", ordersPerDay);
 
@@ -28,6 +28,8 @@ const BarChartComponent = ({orders}) => {
       graphSeedData[i] =
       {
         orders: ["grog"],
+        numOrders: 0,
+        date: i,
         tipTotal: 0,
       };
     }
@@ -57,6 +59,7 @@ const BarChartComponent = ({orders}) => {
 
         if (date.getDate() == i) return true;
       });
+      graphSeedData[i].numOrders = graphSeedData[i].orders.length;
     }
     return graphSeedData;
   }
@@ -98,20 +101,20 @@ const BarChartComponent = ({orders}) => {
   return (
     <div style={barChartStyle}>
       <h4>Bar Chart</h4>
-      <BarChart width={600} height={300} data={data}>
-        <XAxis dataKey="day" stroke="#8884d8" />
+      <BarChart width={1100} height={500} data={ordersPerDay}>
+        <XAxis dataKey="date" stroke="#8884d8" />
         <YAxis />
         <Tooltip />
         <CartesianGrid stroke="#ccc" strokeDasharray="5 5" />
-        <Bar type="monotone" dataKey="orders" fill="#8884d8" barSize={30} />
+        <Bar type="monotone" dataKey="numOrders" fill="#8884d8" barSize={30} />
       </BarChart>
     </div>
   );
 };
 
 const barChartStyle = {
-  width: '40%',
-  float: 'left',
+  width: '80%',
+  // float: 'left',
   textAlign: 'center'
 };
 

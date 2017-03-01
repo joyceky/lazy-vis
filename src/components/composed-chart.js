@@ -23,8 +23,8 @@ const ComposedChartComponent = React.createClass({
   })
 
 const composedChartStyle = {
-  width: '40%',
-  float: 'right',
+  width: '80%',
+  // float: 'right',
   textAlign: 'center',
 };
 
