@@ -20,8 +20,8 @@ const LineChartComponent = () => {
 };
 
 const lineChartStyle = {
-  width: '40%',
-  float: 'right',
+  width: '80%',
+  // float: 'right',
   textAlign: 'center',
 };
 
